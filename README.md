@@ -44,7 +44,6 @@ Projede aşağıdaki yapılar ve bileşenler kullanılmıştır :  <br>
 - Runnable ve Handler
 - Grid Layout
 - Constraint Layout
-- Button
 - Text View
 - Image View
 
@@ -80,6 +79,8 @@ https://www.flaticon.com/search?word=fruit
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/strawberry.png)
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/watermelon.png)
 
+<br>
+
 ## Alert Dialog Tanımı ve Kullanımı
 
 Alert Dialog kullanıcıya bir seçim yapması için belli bir işlem bittikten sonra sorulan soru cümlecikleri diyebiliriz.
@@ -111,4 +112,61 @@ Aşağıda Alert Dialog tanımı ve kullanımı ile ilgili kodlar mevcuttur :
                 val alert = dialog.create()
                 alert.show() 
 ```
+
+<br>
+
+## Runnables, Handler ve Timer Kullanımı
+
+**Runnables** : İçerisindeki run metodu içinde yapılması gereken işlemler belirtilir.
+
+**Handler ve Timer** : Belirli aralıklarla tekrarlanmasını istediğimiz olaylara yön vermemizi ve bunları 
+yönetmemizi sağlayan yapılardır.
+
+Projemizde 10'dan 0'a geriye doğru sayma işlemi yapılmaktadır. Ondan dolayı yukarıdaki yapılar kullanılmıştır.
+
+```java 
+    var handler: Handler = Handler() // handler nesnesi
+
+    var runnable: Runnable = Runnable { } // runnable nesnesi
+```
+Nesne tanımları yapılmıştır.
+
+
+```java 
+   // 10 saniye boyunca 1 er 1 er azalan bir timer
+        object : CountDownTimer(10000, 1000) {
+
+
+            override fun onFinish() { // oyun bitiminde neler olacak
+
+                tvTime.text = "Zaman Doldu." // zaman dolunca mesaj yaz.
+                handler.removeCallbacks(runnable) // gelen çeğrıları sil
+
+
+                for (image in imageArray) { // image array içinde dön
+
+                    image.visibility = View.INVISIBLE // resimler gizle.
+                }
+          
+            }
+
+            override fun onTick(p0: Long) { // herbir saniyede neler olacak
+
+                tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
+            }
+
+
+        }.start()
+```
+
+10'dan geriye doğru sayma işlemini yapan bir sınıf bulunmaktadır. Sınıfın 2 adet ise metodu eklenmelidir.
+Bunlar aşağıdaki metodlardır. Bu metodlar eklenmezse uyarı verip metodları eklemenizi ister.
+
+ - _onFinish_ : Bu metod Timer ile ilgili işlem tamamlandıktan sonra ne yapılacak onu içeren bir fonksiyondur.
+Örneğimizde zaman dolunca text'e mesaj yazdırıp ekrandaki görünür meyveleri görünmez yaparak kullanıcının
+meyvelere tıklayıp puanı artmasın diye. Gelecek çağrıları silerek oyunumuzu bitirmiş oluyoruz.
+
+ - _onTick_ : Her bir saniyede ne işlem yapılacak onu belirten metoddur. Her bir saniyede saniyeyi güncelleme
+işlemi yapılıp text kısmına yazılır.
+
 
