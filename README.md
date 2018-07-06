@@ -249,6 +249,6 @@ Kullanıcı her tıklamada score değişkeni 1 defa arttırılıyor ve ekrandaki
 
 ## Projenin Lisansı
 
-Bu proje temel seviyede Kotlin bilgisi ile yapılmış bir uygulamadır. 
-İstediğiniz gibi kullanabilir,destek verebilir ve paylaşımlarda bulunabilirsiniz.
+Bu proje temel seviyede Kotlin bilgisi ile yapılmış bir uygulamadır. <br>
+İstediğiniz gibi kullanabilir,destek verebilir ve paylaşımlarda bulunabilirsiniz. <br>
 Katkı ve destek vermek isteyenler olursa onlarıda projeye dahil edebilirim :smile:
