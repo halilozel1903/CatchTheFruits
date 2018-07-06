@@ -2,6 +2,8 @@
 
 ![Screenshot](kotlin.png)
 
+<br>
+
 # Kotlin Nedir ?
 
 Kotlin Nedir ? adlı bir blog yazısı yazdım. Kotlin dilinin ne olduğu ne işe yaradığı, Java ile farkı benzerlikleri, Kotlin'in
@@ -9,6 +11,7 @@ desteklediği platformlar ve birbirinden güzel kaynaklar ekledim. Yazıya aşa�
 
 https://medium.com/@halilozel1903/kotlin-nedir-43e312d2dca6
 
+<br>
 
 # Kotlin Dersleri 
 
@@ -17,10 +20,13 @@ Derslere eklemeler devam edecek. Kotlin'e yeni başlıyorsanız aşağıdaki lin
 
 https://github.com/halilozel1903/KotlinTutorials
 
+<br>
 
 ## Projenin Amacı
 
 Kotlin ile Android uygulama geliştirmenin Java diline göre daha az kod ve kolay bir şekilde oluşturulduğunu göstermek.
+
+<br>
 
 ## Projenin Oynanışı 
 
@@ -33,7 +39,7 @@ Onun ölçümünü ve reflekslerinizin kuvvetini ölçen bir uygulamadır.
 </p>
 
 
-
+<br>
 
 ## Projenin İçeriği
 
@@ -46,6 +52,8 @@ Projede aşağıdaki yapılar ve bileşenler kullanılmıştır :  <br>
 - Constraint Layout
 - Text View
 - Image View
+
+<br>
 
 ## Projenin Ekran Tasarımı
 
@@ -115,6 +123,12 @@ Aşağıda Alert Dialog tanımı ve kullanımı ile ilgili kodlar mevcuttur :
 
 <br>
 
+## Alert Dialog Ekran Görüntüsü 
+
+![Alert](alert.png)
+
+<br>
+
 ## Runnables, Handler ve Timer Kullanımı
 
 **Runnables** : İçerisindeki run metodu içinde yapılması gereken işlemler belirtilir.
@@ -169,4 +183,72 @@ meyvelere tıklayıp puanı artmasın diye. Gelecek çağrıları silerek oyunum
  - _onTick_ : Her bir saniyede ne işlem yapılacak onu belirten metoddur. Her bir saniyede saniyeyi güncelleme
 işlemi yapılıp text kısmına yazılır.
 
+<br>
 
+## Resimleri Gizleme ve Rastgele Gösterme İşlemi
+
+Random sınıfı yardımıyla rastgele 9 sayı üretip onları aşağıdaki fonksiyon içerisinde kullanarak kullanıcıya
+her yarım saniyede bir rastgele bir image gösteriyoruz. Bu işlemleri sürekli tekrar eden bir yapıda bulunduğu
+için runnable ve handler yardımıyla yapıyoruz.
+
+// resimleri gizleme metodu
+
+```java
+    fun hideImages() {
+
+        runnable = object : Runnable { // runnable ile ilgili işlemler yapılıyor.
+            override fun run() {
+                for (image in imageArray) { // image array içinde dön
+
+                    image.visibility = View.INVISIBLE // resimler gizle.
+                }
+
+                val random = Random() // random nesnesi olusturma
+                val index = random.nextInt(8 - 0) // 9 adet random sayı olusturma
+                imageArray[index].visibility = View.VISIBLE // rastgele bir index görünür yapma
+
+                handler.postDelayed(runnable, 500) // resimleri yarım saniyede bir değiştirme
+            }
+        }
+        handler.post(runnable) // handler'a runnable atama işlemi yapılıyor.
+
+    }
+```
+
+<br>
+
+
+## Resimlere Tıklanınca Puan Arttırma İşlemi
+
+Kullanıcı ekranda bulunan resimlere tıklayarak puan almaktadır. Kullanıcının bu işlemi nasıl yaptığını
+merak ediyorsanız haydi aşağıdaki metodu inceleyelim ;)
+
+```java
+// resimlere tıklanınca puan arttıran fonksiyon
+
+    fun increaseScore(view: View) {
+
+        score++ // skor arttırma
+
+        tvScore.text = "Score : " + score // skor değeri ekranda gösteriliyor.
+
+    }
+```
+
+Kullanıcı her tıklamada score değişkeni 1 defa arttırılıyor ve ekrandaki score değerini güncelliyor.
+
+<br>
+
+## Yararlandığım Kaynaklar
+
+- https://www.udemy.com/android-o-mobil-uygulama-dersi-kotlin-java
+- https://gelecegiyazanlar.turkcell.com.tr/soru/android-timer-kullanimi
+- http://muminbasol.blogspot.com/2014/12/android-timer-handler.html
+
+<br>
+
+## Projenin Lisansı
+
+Bu proje temel seviyede Kotlin bilgisi ile yapılmış bir uygulamadır. 
+İstediğiniz gibi kullanabilir,destek verebilir ve paylaşımlarda bulunabilirsiniz.
+Katkı ve destek vermek isteyenler olursa onlarıda projeye dahil edebilirim :smile:
