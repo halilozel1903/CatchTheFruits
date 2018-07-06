@@ -22,6 +22,18 @@ https://github.com/halilozel1903/KotlinTutorials
 
 Kotlin ile Android uygulama geliştirmenin Java diline göre daha az kod ve kolay bir şekilde oluşturulduğunu göstermek.
 
+## Projenin Oynanışı 
+
+Uygulamada 9 adet farklı meyve resimleri bulunmaktadır. Rastgele 1 tanesi yarım saniyede bir değişmektedir. Diğer 8 tane
+meyve oyun bitine kadar gizlenmektedir. Oyun süresi 10 saniyedir. Bu süre zarfında en çok ne kadar meyve yakalayabilirsiniz.
+Onun ölçümünü ve reflekslerinizin kuvvetini ölçen bir uygulamadır.
+
+<p>
+  <img src="game.gif" width="350" >
+</p>
+
+
+
 
 ## Projenin İçeriği
 
@@ -67,3 +79,36 @@ https://www.flaticon.com/search?word=fruit
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/pear.png)
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/strawberry.png)
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/watermelon.png)
+
+## Alert Dialog Tanımı ve Kullanımı
+
+Alert Dialog kullanıcıya bir seçim yapması için belli bir işlem bittikten sonra sorulan soru cümlecikleri diyebiliriz.
+Biz projemizde kullanıcıya 10 saniye boyunca kaç adet meyve yakalayabildi onun sayısını verip. 
+Tekrardan oyunu oynamak isteyip istemediğini sormak için kullanılıyoruz.
+
+Aşağıda Alert Dialog tanımı ve kullanımı ile ilgili kodlar mevcuttur : 
+
+```java 
+  val dialog = AlertDialog.Builder(this@MainActivity)
+                dialog.setCancelable(false)
+                dialog.setTitle("Catch The Fruits")
+                dialog.setMessage("Yaptığın Skor : $score\nTekrardan oynamak ister misiniz ?")
+                dialog.setPositiveButton("YES") { dialog, id ->
+                
+                   Restart()
+                }
+                        .setNegativeButton("NO ") { dialog, which ->
+                            score = 0
+                            tvScore.setText("Score : $score")
+                            tvTime.setText("Time : " + "0")
+
+                            for (image in imageArray) { // image array içinde dön
+
+                                image.visibility = View.INVISIBLE // resimler gizle.
+                            }
+                        }
+
+                val alert = dialog.create()
+                alert.show() 
+```
+
