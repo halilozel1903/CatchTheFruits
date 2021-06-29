@@ -4,35 +4,35 @@
 
 <br>
 
-# Kotlin Nedir ?
+# What is Kotlin?
 
-Kotlin Nedir ? adlı bir blog yazısı yazdım. Kotlin dilinin ne olduğu ne işe yaradığı, Java ile farkı benzerlikleri, Kotlin'in
-desteklediği platformlar ve birbirinden güzel kaynaklar ekledim. Yazıya aşağıdaki linkten ulaşabilirsiniz :
+What is Kotlin? I wrote a blog post called What the Kotlin language is, what it does, its differences and similarities with Java, Kotlin's
+I have added the platforms it supports and the beautiful resources. You can access the article at the link below:
 
 https://medium.com/@halilozel1903/kotlin-nedir-43e312d2dca6
 
 <br>
 
-# Kotlin Dersleri 
+# Kotlin Tutorials
 
-Kotlin ile ilgili bir seri hazırladım. Kotlin temellerinden başlayıp ileriye doğru ilerleyen bir proje.
-Derslere eklemeler devam edecek. Kotlin'e yeni başlıyorsanız aşağıdaki linkteki örnekleri inceleminizi tavsiye ederim : 
+I have prepared a series about Kotlin. It's a project that starts from the basics of Kotlin and moves forward.
+Additions to the courses will continue. If you are new to Kotlin, I recommend you to review the examples in the link below:
 
 https://github.com/halilozel1903/KotlinTutorials
 
 <br>
 
-## Projenin Amacı
+## The goal of the project
 
-Kotlin ile Android uygulama geliştirmenin Java diline göre daha az kod ve kolay bir şekilde oluşturulduğunu göstermek.
+To show that Android application development with Kotlin is easier and less code than Java language.
 
 <br>
 
-## Projenin Oynanışı 
+## Gameplay of the Project
 
-Uygulamada 9 adet farklı meyve resimleri bulunmaktadır. Rastgele 1 tanesi yarım saniyede bir değişmektedir. Diğer 8 tane
-meyve oyun bitine kadar gizlenmektedir. Oyun süresi 10 saniyedir. Bu süre zarfında en çok ne kadar meyve yakalayabilirsiniz.
-Onun ölçümünü ve reflekslerinizin kuvvetini ölçen bir uygulamadır.
+There are 9 different fruit pictures in the application. 1 random one changes every half second. other 8
+The fruit is hidden until the game is over. Play time is 10 seconds. How much fruit can you catch during this time?
+It is an application that measures its measurement and the strength of your reflexes.
 
 <p>
   <img src="game.gif" width="350" >
@@ -41,41 +41,41 @@ Onun ölçümünü ve reflekslerinizin kuvvetini ölçen bir uygulamadır.
 
 <br>
 
-## Projenin İçeriği
+## Content of the Project
 
-Projede aşağıdaki yapılar ve bileşenler kullanılmıştır :  <br>
+The following structures and components were used in the project: <br>
 
 - Alert Dialog
 - Timers
-- Runnable ve Handler
+- Runnable and Handler
 - Grid Layout
 - Constraint Layout
-- Text View
-- Image View
+- TextView
+- ImageView
 
 <br>
 
-## Projenin Ekran Tasarımı
+## Screen Design of the Project
 
 ![Dizayn](pic1.png)
 
-Proje şimdilik tek ekran olarak tasarlandı. En dışta Constraint Layout ve içerisine Grid Layout eklenmiştir. Grid Layout
-içinde ise 9 adet Image View kullanıldı. Üst kısımda zamanı tutmak için bir text view ve aşağıda skoru göstermek için başka
-bir text view kullanılmıştır. Aşağıdaki yapıyı inceleyerek dediklerimi daha iyi anlayacaksınız.
+The project is designed as a single screen for now. The outermost Constraint Layout and the inside Grid Layout have been added. Grid Layout
+9 Image Views were used in it. One text view at the top to keep the time and another to show the score below
+A text view is used. You'll understand better what I'm talking about by reviewing the structure below.
 
 https://gist.github.com/halilozel1903/fa265cdd77678d68c5d4d17efcd576aa
 
-Tasarım kısmında Grid Layout eklemek için gradle dosyasına aşağıdaki ifadeyi ekleminiz gerekmektedir.
+In order to add Grid Layout in the design section, you need to add the following statement to the gradle file.
 
 ```java 
  implementation 'com.android.support:gridlayout-v7:28.0.0-alpha3' 
 ```
 
-Image View'lara eklenen resimleri aşağıdaki siteden aratıp bulabilirsiniz : 
+You can find the images added to Image Views by searching the following site:
 
 https://www.flaticon.com/search?word=fruit
 
-İsterseniz farklı meyveler bulup değiştirebilirsiniz. Ben projede bulunan resimleri aşağıya ekliyorum.
+You can find and replace different fruits if you want. I am attaching the pictures in the project below.
 
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/apple.png)
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/bananas.png)
@@ -89,13 +89,13 @@ https://www.flaticon.com/search?word=fruit
 
 <br>
 
-## Alert Dialog Tanımı ve Kullanımı
+## Alert Dialog Definition and Usage
 
-Alert Dialog kullanıcıya bir seçim yapması için belli bir işlem bittikten sonra sorulan soru cümlecikleri diyebiliriz.
-Biz projemizde kullanıcıya 10 saniye boyunca kaç adet meyve yakalayabildi onun sayısını verip. 
-Tekrardan oyunu oynamak isteyip istemediğini sormak için kullanılıyoruz.
+We can say that Alert Dialog is a question sentence that is asked to the user after a certain operation is completed in order to make a choice.
+In our project, we gave the user the number of fruits he could catch for 10 seconds.
+We are used to ask if he wants to play the game again.
 
-Aşağıda Alert Dialog tanımı ve kullanımı ile ilgili kodlar mevcuttur : 
+Below are the codes related to the definition and usage of Alert Dialog:
 
 ```java 
   val dialog = AlertDialog.Builder(this@MainActivity)
@@ -111,9 +111,9 @@ Aşağıda Alert Dialog tanımı ve kullanımı ile ilgili kodlar mevcuttur :
                             tvScore.setText("Score : $score")
                             tvTime.setText("Time : " + "0")
 
-                            for (image in imageArray) { // image array içinde dön
+                            for (image in imageArray) {
 
-                                image.visibility = View.INVISIBLE // resimler gizle.
+                                image.visibility = View.INVISIBLE 
                             }
                         }
 
@@ -123,94 +123,93 @@ Aşağıda Alert Dialog tanımı ve kullanımı ile ilgili kodlar mevcuttur :
 
 <br>
 
-## Alert Dialog Ekran Görüntüsü 
+## Alert Dialog Screenshot
 
 ![Alert](alert.png)
 
 <br>
 
-## Runnables, Handler ve Timer Kullanımı
+## Using Runnables, Handler and Timer
 
-**Runnables** : İçerisindeki run metodu içinde yapılması gereken işlemler belirtilir.
+**Runnables** : The operations to be done within the run method are specified.
 
-**Handler ve Timer** : Belirli aralıklarla tekrarlanmasını istediğimiz olaylara yön vermemizi ve bunları 
-yönetmemizi sağlayan yapılardır.
+**Handler and Timer** : It allows us to direct the events that we want to be repeated at certain intervals and to use them.
+structures that enable us to manage.
 
-Projemizde 10'dan 0'a geriye doğru sayma işlemi yapılmaktadır. Ondan dolayı yukarıdaki yapılar kullanılmıştır.
+In our project, counting backwards from 10 to 0 is performed. Therefore, the above structures were used.
 
 ```java 
     var handler: Handler = Handler() // handler nesnesi
 
     var runnable: Runnable = Runnable { } // runnable nesnesi
 ```
-Nesne tanımları yapılmıştır.
-
+Object definitions are made.
 
 ```java 
    // 10 saniye boyunca 1 er 1 er azalan bir timer
         object : CountDownTimer(10000, 1000) {
 
 
-            override fun onFinish() { // oyun bitiminde neler olacak
+            override fun onFinish() { 
 
-                tvTime.text = "Zaman Doldu." // zaman dolunca mesaj yaz.
-                handler.removeCallbacks(runnable) // gelen çeğrıları sil
+                tvTime.text = "Zaman Doldu." 
+                handler.removeCallbacks(runnable)
 
 
-                for (image in imageArray) { // image array içinde dön
+                for (image in imageArray) { 
 
-                    image.visibility = View.INVISIBLE // resimler gizle.
+                    image.visibility = View.INVISIBLE 
                 }
           
             }
 
-            override fun onTick(p0: Long) { // herbir saniyede neler olacak
+            override fun onTick(p0: Long) { 
 
-                tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
+                tvTime.text = "Time : " + p0 / 1000 
             }
 
 
         }.start()
 ```
 
-10'dan geriye doğru sayma işlemini yapan bir sınıf bulunmaktadır. Sınıfın 2 adet ise metodu eklenmelidir.
-Bunlar aşağıdaki metodlardır. Bu metodlar eklenmezse uyarı verip metodları eklemenizi ister.
+There is a class that counts backwards from 10. If the class has 2, the method should be added.
+These are the following methods. If these methods are not added, it will warn you and ask you to add the methods.
 
- - _onFinish_ : Bu metod Timer ile ilgili işlem tamamlandıktan sonra ne yapılacak onu içeren bir fonksiyondur.
-Örneğimizde zaman dolunca text'e mesaj yazdırıp ekrandaki görünür meyveleri görünmez yaparak kullanıcının
-meyvelere tıklayıp puanı artmasın diye. Gelecek çağrıları silerek oyunumuzu bitirmiş oluyoruz.
+  - _onFinish_ : This method is a function that includes what to do after the operation about the Timer is completed.
+In our example, when the time is up, we print a message to the text and make the visible fruits on the screen invisible.
+so that he does not click on the fruits and increase the score. By deleting future calls, we finish our game.
 
- - _onTick_ : Her bir saniyede ne işlem yapılacak onu belirten metoddur. Her bir saniyede saniyeyi güncelleme
-işlemi yapılıp text kısmına yazılır.
+  - _onTick_ : It is the method that specifies what will be done in each second. Update seconds every second
+process is done and written in the text part.
 
 <br>
 
-## Resimleri Gizleme ve Rastgele Gösterme İşlemi
+## How to Hide Pictures and Randomly Show them
 
-Random sınıfı yardımıyla rastgele 9 sayı üretip onları aşağıdaki fonksiyon içerisinde kullanarak kullanıcıya
-her yarım saniyede bir rastgele bir image gösteriyoruz. Bu işlemleri sürekli tekrar eden bir yapıda bulunduğu
-için runnable ve handler yardımıyla yapıyoruz.
+Generate 9 random numbers with the help of the Random class and use them in the function below.
+we show a random image every half second. It has a structure that repeats these processes continuously.
+We do it with the help of runnable and handler.
 
-// resimleri gizleme metodu
+// method to hide pictures
 
 ```java
     fun hideImages() {
 
-        runnable = object : Runnable { // runnable ile ilgili işlemler yapılıyor.
+        runnable = object : Runnable { 
             override fun run() {
-                for (image in imageArray) { // image array içinde dön
+                for (image in imageArray) { 
 
-                    image.visibility = View.INVISIBLE // resimler gizle.
+                    image.visibility = View.INVISIBLE
                 }
 
-                val random = Random() // random nesnesi olusturma
-                val index = random.nextInt(8 - 0) // 9 adet random sayı olusturma
-                imageArray[index].visibility = View.VISIBLE // rastgele bir index görünür yapma
+                val random = Random() 
+                val index = random.nextInt(8 - 0)
+                imageArray[index].visibility = View.VISIBLE 
 
-                handler.postDelayed(runnable, 500) // resimleri yarım saniyede bir değiştirme
+                handler.postDelayed(runnable, 500) 
             }
         }
-        handler.post(runnable) // handler'a runnable atama işlemi yapılıyor.
+        handler.post(runnable)
 
     }
 ```
@@ -218,37 +217,50 @@ için runnable ve handler yardımıyla yapıyoruz.
 <br>
 
 
-## Resimlere Tıklanınca Puan Arttırma İşlemi
+## Score Increase Process when Clicking on Pictures
 
-Kullanıcı ekranda bulunan resimlere tıklayarak puan almaktadır. Kullanıcının bu işlemi nasıl yaptığını
-merak ediyorsanız haydi aşağıdaki metodu inceleyelim ;)
+The user gets points by clicking the pictures on the screen. How does the user do this?
+If you're curious, let's examine the method below ;)
 
 ```java
-// resimlere tıklanınca puan arttıran fonksiyon
+// Function that increases points when clicking pictures
 
     fun increaseScore(view: View) {
 
         score++ // skor arttırma
 
-        tvScore.text = "Score : " + score // skor değeri ekranda gösteriliyor.
+        tvScore.text = "Score : " + score // score value is displayed on the screen.
 
     }
 ```
 
-Kullanıcı her tıklamada score değişkeni 1 defa arttırılıyor ve ekrandaki score değerini güncelliyor.
+Each time the user clicks, the score variable is incremented once and updates the score value on the screen.
 
 <br>
 
-## Yararlandığım Kaynaklar
 
-- https://www.udemy.com/android-o-mobil-uygulama-dersi-kotlin-java
-- https://gelecegiyazanlar.turkcell.com.tr/soru/android-timer-kullanimi
-- http://muminbasol.blogspot.com/2014/12/android-timer-handler.html
+## License  ℹ️
+```
+MIT License
 
-<br>
+Copyright (c) 2021 Halil Özel
 
-## Projenin Lisansı
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Bu proje temel seviyede Kotlin bilgisi ile yapılmış bir uygulamadır. <br>
-İstediğiniz gibi kullanabilir,destek verebilir ve paylaşımlarda bulunabilirsiniz. <br>
-Katkı ve destek vermek isteyenler olursa onlarıda projeye dahil edebilirim :smile:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
