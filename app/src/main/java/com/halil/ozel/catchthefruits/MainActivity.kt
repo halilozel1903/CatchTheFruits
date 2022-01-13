@@ -1,35 +1,49 @@
 package com.halil.ozel.catchthefruits
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
-import android.support.v7.app.AlertDialog
+import android.os.Looper
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.ImageView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.halil.ozel.catchthefruits.databinding.ActivityMainBinding
 import java.util.*
 
 
-
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     var score: Int = 0 // skor değişkeni
 
     var imageArray = ArrayList<ImageView>() // array tanımı
 
-    var handler: Handler = Handler() // handler nesnesi
+    var handler: Handler = Handler(Looper.getMainLooper()) // handler nesnesi
 
     var runnable: Runnable = Runnable { } // runnable nesnesi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         score = 0 // skor değeri sıfırlandı.
 
         // tanımlanan array içine imageler eklendi.
-        imageArray = arrayListOf(ivApple, ivBanana, ivCherry, ivGrapes, ivKiwi, ivOrange, ivPear, ivStrawberry, ivWatermelon)
+        imageArray = arrayListOf(
+            binding.ivApple,
+            binding.ivBanana,
+            binding.ivCherry,
+            binding.ivGrapes,
+            binding.ivKiwi,
+            binding.ivOrange,
+            binding.ivPear,
+            binding.ivStrawberry,
+            binding.ivWatermelon
+        )
 
         hideImages() // metod cagrildi.
 
@@ -40,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFinish() { // oyun bitiminde neler olacak
 
-                tvTime.text = "Zaman Doldu." // zaman dolunca mesaj yaz.
+                binding.tvTime.text = "Zaman Doldu." // zaman dolunca mesaj yaz.
                 handler.removeCallbacks(runnable) // gelen çeğrıları sil
 
 
@@ -56,20 +70,22 @@ class MainActivity : AppCompatActivity() {
                 dialog.setMessage("Yaptığın Skor : $score\nTekrardan oynamak ister misiniz ?")
                 dialog.setPositiveButton("YES") { dialog, id ->
 
-                   Restart()
+                    Restart()
 
                 }
-                        .setNegativeButton("NO ") { dialog, which ->
-                            score = 0
-                            tvScore.setText("Score : $score")
-                            tvTime.setText("Time : " + "0")
+                    .setNegativeButton("NO ") { dialog, which ->
+                        score = 0
+                        binding.tvScore.text = "Score : $score"
+                        binding.tvTime.text = "Time : " + "0"
 
-                            for (image in imageArray) { // image array içinde dön
+                        for (image in imageArray) { // image array içinde dön
 
-                                image.visibility = View.INVISIBLE // resimler gizle.
-                            }
-
+                            image.visibility = View.INVISIBLE // resimler gizle.
                         }
+
+                        finish()
+
+                    }
 
                 val alert = dialog.create()
                 alert.show()
@@ -77,7 +93,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTick(p0: Long) { // herbir saniyede neler olacak
 
-                tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
+                binding.tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
             }
 
 
@@ -88,22 +104,20 @@ class MainActivity : AppCompatActivity() {
 
     // resimleri gizleme metodu
 
-    fun hideImages() {
+    private fun hideImages() {
 
-        runnable = object : Runnable { // runnable ile ilgili işlemler yapılıyor.
-            override fun run() {
-                for (image in imageArray) { // image array içinde dön
+        runnable = Runnable()// runnable ile ilgili işlemler yapılıyor.
+        {
+            for (image in imageArray) { // image array içinde dön
 
-                    image.visibility = View.INVISIBLE // resimler gizle.
-                }
-
-                val random = Random() // random nesnesi olusturma
-                val index = random.nextInt(8 - 0) // 9 adet random sayı olusturma
-                imageArray[index].visibility = View.VISIBLE // rastgele bir index görünür yapma
-
-                handler.postDelayed(runnable, 500) // resimleri yarım saniyede bir değiştirme
+                image.visibility = View.INVISIBLE // resimler gizle.
             }
 
+            val random = Random() // random nesnesi olusturma
+            val index = random.nextInt(8 - 0) // 9 adet random sayı olusturma
+            imageArray[index].visibility = View.VISIBLE // rastgele bir index görünür yapma
+
+            handler.postDelayed(runnable, 500) // resimleri yarım saniyede bir değiştirme
         }
 
         handler.post(runnable) // handler'a runnable atama işlemi yapılıyor.
@@ -117,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         score++ // skor arttırma
 
-        tvScore.text = "Score : " + score // skor değeri ekranda gösteriliyor.
+        binding.tvScore.text = "Score : " + score // skor değeri ekranda gösteriliyor.
 
     }
 
@@ -128,9 +142,9 @@ class MainActivity : AppCompatActivity() {
 
 
         score = 0
-        tvScore.setText("Score : $score")
+        binding.tvScore.text = "Score : $score"
         hideImages()
-        tvTime.setText("Time : " +10000/1000)
+        binding.tvTime.text = "Time : " + 10000 / 1000
 
         for (image in imageArray) { // image array içinde dön
 
@@ -143,9 +157,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFinish() { // oyun bitiminde neler olacak
 
-                tvTime.text = "Zaman Doldu !!!" // zaman dolunca mesaj yaz.
+                binding.tvTime.text = "Zaman Doldu !!!" // zaman dolunca mesaj yaz.
                 handler.removeCallbacks(runnable) // gelen çeğrıları sil
-
 
 
                 val dialog = AlertDialog.Builder(this@MainActivity)
@@ -157,30 +170,27 @@ class MainActivity : AppCompatActivity() {
                     Restart()
 
                 }
-                        .setNegativeButton("NO ") { dialog, which ->
-                            score = 0
-                            tvScore.setText("Score : $score")
-                            tvTime.setText("Time : " + "0")
+                    .setNegativeButton("NO ") { dialog, which ->
+                        score = 0
+                        binding.tvScore.text = "Score : $score"
+                        binding.tvTime.text = "Time : " + "0"
 
 
-                            for (image in imageArray) { // image array içinde dön
+                        for (image in imageArray) { // image array içinde dön
 
-                                image.visibility = View.INVISIBLE // resimler gizle.
-                            }
-
+                            image.visibility = View.INVISIBLE // resimler gizle.
                         }
+
+                    }
 
                 val alert = dialog.create()
                 alert.show()
             }
 
 
-
-
-
             override fun onTick(p0: Long) { // herbir saniyede neler olacak
 
-                tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
+                binding.tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
             }
 
 
