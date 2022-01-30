@@ -1,4 +1,4 @@
-# Catch The Fruits
+# Catch 👻 The Fruits 🍒 🍓 🍇 🍎 🍉 🍑 🍌 🥝 
 
 ![Screenshot](kotlin.png)
 
@@ -11,7 +11,6 @@ I have added the platforms it supports and the beautiful resources. You can acce
 
 https://medium.com/@halilozel1903/kotlin-nedir-43e312d2dca6
 
-<br>
 
 # Kotlin Tutorials
 
@@ -20,13 +19,11 @@ Additions to the courses will continue. If you are new to Kotlin, I recommend yo
 
 https://github.com/halilozel1903/KotlinTutorials
 
-<br>
 
 ## The goal of the project
 
 To show that Android application development with Kotlin is easier and less code than Java language.
 
-<br>
 
 ## Gameplay of the Project
 
@@ -38,8 +35,6 @@ It is an application that measures its measurement and the strength of your refl
   <img src="game.gif" width="350" >
 </p>
 
-
-<br>
 
 ## Content of the Project
 
@@ -53,7 +48,6 @@ The following structures and components were used in the project: <br>
 - TextView
 - ImageView
 
-<br>
 
 ## Screen Design of the Project
 
@@ -68,7 +62,7 @@ https://gist.github.com/halilozel1903/fa265cdd77678d68c5d4d17efcd576aa
 In order to add Grid Layout in the design section, you need to add the following statement to the gradle file.
 
 ```java 
- implementation 'com.android.support:gridlayout-v7:28.0.0-alpha3' 
+ implementation 'androidx.gridlayout:gridlayout:1.0.0'
 ```
 
 You can find the images added to Image Views by searching the following site:
@@ -243,7 +237,7 @@ Each time the user clicks, the score variable is incremented once and updates th
 ```
 MIT License
 
-Copyright (c) 2022 Halil Özel
+Copyright (c) 2022 Halil OZEL
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
