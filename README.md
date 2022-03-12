@@ -1,4 +1,4 @@
-# Catch The Fruits 🍒 🍓 🍇 🍎 🍉 🍑 🍌 🥝 🍍 🫐 🍏 🥭 🥑 🍈 🍐 🍊
+# Catch The Fruits 🍒 🍓 🍇 🍎 🍉 🍑 🍌 🥝 🍍 🫐 🍏 
 
 ![Screenshot](kotlin.png)
 
