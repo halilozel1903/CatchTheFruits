@@ -1,10 +1,9 @@
-# Catch 👻 The Fruits 🍒 🍓 🍇 🍎 🍉 🍑 🍌 🥝 
+# Catch The Fruits 🍒 🍓 🍇 🍎 🍉 🍑 🍌 🥝 🍍 🫐 🍏 🥭 🥑 🍈 🍐 🍊
 
 ![Screenshot](kotlin.png)
 
-<br>
 
-# What is Kotlin?
+# What is Kotlin ⁉️
 
 What is Kotlin? I wrote a blog post called What the Kotlin language is, what it does, its differences and similarities with Java, Kotlin's
 I have added the platforms it supports and the beautiful resources. You can access the article at the link below:
@@ -12,7 +11,7 @@ I have added the platforms it supports and the beautiful resources. You can acce
 https://medium.com/@halilozel1903/kotlin-nedir-43e312d2dca6
 
 
-# Kotlin Tutorials
+# Kotlin Tutorials 📌
 
 I have prepared a series about Kotlin. It's a project that starts from the basics of Kotlin and moves forward.
 Additions to the courses will continue. If you are new to Kotlin, I recommend you to review the examples in the link below:
@@ -20,12 +19,12 @@ Additions to the courses will continue. If you are new to Kotlin, I recommend yo
 https://github.com/halilozel1903/KotlinTutorials
 
 
-## The goal of the project
+## The goal of the project 😎
 
 To show that Android application development with Kotlin is easier and less code than Java language.
 
 
-## Gameplay of the Project
+## Gameplay of the Project 👻
 
 There are 9 different fruit pictures in the application. 1 random one changes every half second. other 8
 The fruit is hidden until the game is over. Play time is 10 seconds. How much fruit can you catch during this time?
@@ -36,7 +35,7 @@ It is an application that measures its measurement and the strength of your refl
 </p>
 
 
-## Content of the Project
+## Content of the Project 📖
 
 The following structures and components were used in the project: <br>
 
@@ -49,7 +48,7 @@ The following structures and components were used in the project: <br>
 - ImageView
 
 
-## Screen Design of the Project
+## Screen Design of the Project 📱
 
 ![Dizayn](pic1.png)
 
@@ -81,9 +80,8 @@ You can find and replace different fruits if you want. I am attaching the pictur
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/strawberry.png)
 ![Screenshot](https://github.com/halilozel1903/CatchTheFruits/blob/master/app/src/main/res/drawable/watermelon.png)
 
-<br>
 
-## Alert Dialog Definition and Usage
+## Alert Dialog Definition and Usage 🚨
 
 We can say that Alert Dialog is a question sentence that is asked to the user after a certain operation is completed in order to make a choice.
 In our project, we gave the user the number of fruits he could catch for 10 seconds.
@@ -95,7 +93,7 @@ Below are the codes related to the definition and usage of Alert Dialog:
   val dialog = AlertDialog.Builder(this@MainActivity)
                 dialog.setCancelable(false)
                 dialog.setTitle("Catch The Fruits")
-                dialog.setMessage("Yaptığın Skor : $score\nTekrardan oynamak ister misiniz ?")
+                dialog.setMessage("Score : $score\nWould you like play again?")
                 dialog.setPositiveButton("YES") { dialog, id ->
                 
                    Restart()
@@ -117,13 +115,12 @@ Below are the codes related to the definition and usage of Alert Dialog:
 
 <br>
 
-## Alert Dialog Screenshot
+## Alert Dialog Screenshot 👀
 
 ![Alert](alert.png)
 
-<br>
 
-## Using Runnables, Handler and Timer
+## Using Runnables, Handler and Timer ⏱
 
 **Runnables** : The operations to be done within the run method are specified.
 
@@ -133,20 +130,19 @@ structures that enable us to manage.
 In our project, counting backwards from 10 to 0 is performed. Therefore, the above structures were used.
 
 ```java 
-    var handler: Handler = Handler() // handler nesnesi
+    var handler: Handler = Handler()
 
-    var runnable: Runnable = Runnable { } // runnable nesnesi
+    var runnable: Runnable = Runnable { }
 ```
 Object definitions are made.
 
 ```java 
-   // 10 saniye boyunca 1 er 1 er azalan bir timer
         object : CountDownTimer(10000, 1000) {
 
 
             override fun onFinish() { 
 
-                tvTime.text = "Zaman Doldu." 
+                tvTime.text = "Time's up!" 
                 handler.removeCallbacks(runnable)
 
 
@@ -176,9 +172,8 @@ so that he does not click on the fruits and increase the score. By deleting futu
   - _onTick_ : It is the method that specifies what will be done in each second. Update seconds every second
 process is done and written in the text part.
 
-<br>
 
-## How to Hide Pictures and Randomly Show them
+## How to Hide Pictures and Randomly Show them 🖼
 
 Generate 9 random numbers with the help of the Random class and use them in the function below.
 we show a random image every half second. It has a structure that repeats these processes continuously.
@@ -208,10 +203,8 @@ We do it with the help of runnable and handler.
     }
 ```
 
-<br>
 
-
-## Score Increase Process when Clicking on Pictures
+## Score Increase Process when Clicking on Pictures 📸
 
 The user gets points by clicking the pictures on the screen. How does the user do this?
 If you're curious, let's examine the method below ;)
@@ -221,7 +214,7 @@ If you're curious, let's examine the method below ;)
 
     fun increaseScore(view: View) {
 
-        score++ // skor arttırma
+        score++
 
         tvScore.text = "Score : " + score // score value is displayed on the screen.
 
@@ -229,8 +222,6 @@ If you're curious, let's examine the method below ;)
 ```
 
 Each time the user clicks, the score variable is incremented once and updates the score value on the screen.
-
-<br>
 
 
 ## License  ℹ️
