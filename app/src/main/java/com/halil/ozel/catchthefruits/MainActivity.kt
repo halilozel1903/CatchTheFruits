@@ -12,7 +12,6 @@ import android.widget.ImageView
 import com.halil.ozel.catchthefruits.databinding.ActivityMainBinding
 import java.util.*
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -125,11 +124,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         object : CountDownTimer(10000, 1000) {
-
-
             @SuppressLint("SetTextI18n")
             override fun onFinish() { // oyun bitiminde neler olacak
-
                 binding.tvTime.text = "Zaman Doldu !!!" // zaman dolunca mesaj yaz.
                 handler.removeCallbacks(runnable) // gelen çeğrıları sil
 
@@ -154,16 +150,10 @@ class MainActivity : AppCompatActivity() {
                 alert.show()
             }
 
-
             @SuppressLint("SetTextI18n")
             override fun onTick(p0: Long) { // herbir saniyede neler olacak
-
                 binding.tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
             }
-
-
         }.start()
-
     }
-
 }
