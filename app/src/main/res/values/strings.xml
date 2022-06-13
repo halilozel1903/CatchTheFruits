@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CatchTheFruits</string>
+    <string name="score_0">Score : 0</string>
+    <string name="time_10">Time : 10</string>
 </resources>
