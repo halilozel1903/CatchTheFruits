@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.catchFruits = this
+        binding.score = getString(R.string.score_0)
 
         score = 0
 
@@ -68,15 +69,15 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun increaseScore() {
         score++
-        binding.tvScore.text = "Score : $score"
+        binding.score = "Score : $score"
     }
 
     @SuppressLint("SetTextI18n")
     fun playAndRestart() {
         score = 0
-        binding.tvScore.text = "Score : $score"
+        binding.score = "Score : $score"
         hideImages()
-        binding.tvTime.text = "Time : " + 10000 / 1000
+        binding.time = "Time : " + 10000 / 1000
 
         for (image in imageArray) {
             image.visibility = View.INVISIBLE
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         object : CountDownTimer(10000, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onFinish() {
-                binding.tvTime.text = "Time's up!!!"
+                binding.time = "Time's up!!!"
                 handler.removeCallbacks(runnable)
 
                 val dialog = AlertDialog.Builder(this@MainActivity).apply {
@@ -98,8 +99,8 @@ class MainActivity : AppCompatActivity() {
                 }
                     .setNegativeButton(getString(R.string.no)) { _, _ ->
                         score = 0
-                        "Score : $score".apply { binding.tvScore.text = this }
-                        ("Time : " + "0").apply { binding.tvTime.text = this }
+                        "Score : $score".apply { binding.score = this }
+                        ("Time : " + "0").apply { binding.time = this }
 
                         for (image in imageArray) {
                             image.visibility = View.INVISIBLE
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun onTick(p0: Long) {
-                binding.tvTime.text = "Time : " + p0 / 1000
+                binding.time = "Time : " + p0 / 1000
             }
         }.start()
     }

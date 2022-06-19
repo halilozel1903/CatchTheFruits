@@ -8,6 +8,14 @@
         <variable
             name="catchFruits"
             type="com.halil.ozel.catchthefruits.MainActivity" />
+
+        <variable
+            name="score"
+            type="String" />
+
+        <variable
+            name="time"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -131,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/time_10"
+            android:text="@{time}"
             android:textSize="36sp"
             app:layout_constraintBottom_toTopOf="@+id/gridLayout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +155,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/score_0"
+            android:text="@{score}"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
