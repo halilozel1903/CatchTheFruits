@@ -39,9 +39,10 @@ It is an application that measures its measurement and the strength of your refl
 
 The following structures and components were used in the project: <br>
 
+- Data Binding
 - Alert Dialog
 - Timers
-- Runnable and Handler
+- Runnable & Handler
 - Grid Layout
 - Constraint Layout
 - TextView
@@ -89,7 +90,7 @@ We are used to ask if he wants to play the game again.
 
 Below are the codes related to the definition and usage of Alert Dialog:
 
-```java 
+```kotlin 
   val dialog = AlertDialog.Builder(this@MainActivity)
                 dialog.setCancelable(false)
                 dialog.setTitle("Catch The Fruits")
@@ -120,23 +121,23 @@ Below are the codes related to the definition and usage of Alert Dialog:
 ![Alert](alert.png)
 
 
-## Using Runnables, Handler and Timer ⏱
+## Using Runnable, Handler and Timer ⏱
 
-**Runnables** : The operations to be done within the run method are specified.
+**Runnable** : The operations to be done within the run method are specified.
 
-**Handler and Timer** : It allows us to direct the events that we want to be repeated at certain intervals and to use them.
+**Handler & Timer** : It allows us to direct the events that we want to be repeated at certain intervals and to use them.
 structures that enable us to manage.
 
 In our project, counting backwards from 10 to 0 is performed. Therefore, the above structures were used.
 
-```java 
+```kotlin 
     var handler: Handler = Handler()
 
     var runnable: Runnable = Runnable { }
 ```
 Object definitions are made.
 
-```java 
+```kotlin 
         object : CountDownTimer(10000, 1000) {
 
 
@@ -181,7 +182,7 @@ We do it with the help of runnable and handler.
 
 // method to hide pictures
 
-```java
+```kotlin
     fun hideImages() {
 
         runnable = object : Runnable { 
@@ -209,7 +210,7 @@ We do it with the help of runnable and handler.
 The user gets points by clicking the pictures on the screen. How does the user do this?
 If you're curious, let's examine the method below ;)
 
-```java
+```kotlin
 // Function that increases points when clicking pictures
 
     fun increaseScore(view: View) {
@@ -222,7 +223,6 @@ If you're curious, let's examine the method below ;)
 ```
 
 Each time the user clicks, the score variable is incremented once and updates the score value on the screen.
-
 
 ## License  ℹ️
 ```
