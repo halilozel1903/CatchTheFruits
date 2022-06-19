@@ -2,4 +2,8 @@
     <string name="app_name">CatchTheFruits</string>
     <string name="score_0">Score : 0</string>
     <string name="time_10">Time : 10</string>
+    <string name="fruit">Fruit</string>
+    <string name="yes">YES</string>
+    <string name="game_name">Catch The Fruits</string>
+    <string name="no">NO</string>
 </resources>

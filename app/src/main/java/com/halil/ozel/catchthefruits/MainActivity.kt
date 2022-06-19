@@ -9,6 +9,7 @@ import android.os.Looper
 import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
 import com.halil.ozel.catchthefruits.databinding.ActivityMainBinding
 import java.util.*
 
@@ -16,23 +17,22 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    var score: Int = 0 // skor değişkeni
+    var score: Int = 0
 
-    var imageArray = ArrayList<ImageView>() // array tanımı
+    var imageArray = ArrayList<ImageView>()
 
-    var handler: Handler = Handler(Looper.getMainLooper()) // handler nesnesi
+    var handler: Handler = Handler(Looper.getMainLooper())
 
-    var runnable: Runnable = Runnable { } // runnable nesnesi
+    var runnable: Runnable = Runnable { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        score = 0 // skor değeri sıfırlandı.
+        binding.catchFruits = this
 
-        // tanımlanan array içine imageler eklendi.
+        score = 0
+
         imageArray = arrayListOf(
             binding.ivApple,
             binding.ivBanana,
@@ -45,34 +45,64 @@ class MainActivity : AppCompatActivity() {
             binding.ivWatermelon
         )
 
-        hideImages() // metod cagrildi.
+        hideImages()
 
-        // 10 saniye boyunca 1 er 1 er azalan bir timer
+        playAndRestart()
+    }
+
+
+    private fun hideImages() {
+        runnable = Runnable {
+            for (image in imageArray) {
+                image.visibility = View.INVISIBLE
+            }
+            val random = Random()
+            val index = random.nextInt(8 - 0)
+            imageArray[index].visibility = View.VISIBLE
+            handler.postDelayed(runnable, 500)
+        }
+        handler.post(runnable)
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    fun increaseScore() {
+        score++
+        binding.tvScore.text = "Score : $score"
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun playAndRestart() {
+        score = 0
+        binding.tvScore.text = "Score : $score"
+        hideImages()
+        binding.tvTime.text = "Time : " + 10000 / 1000
+
+        for (image in imageArray) {
+            image.visibility = View.INVISIBLE
+        }
+
         object : CountDownTimer(10000, 1000) {
             @SuppressLint("SetTextI18n")
-            override fun onFinish() { // oyun bitiminde neler olacak
-                binding.tvTime.text = "Zaman Doldu." // zaman dolunca mesaj yaz.
-                handler.removeCallbacks(runnable) // gelen çeğrıları sil
+            override fun onFinish() {
+                binding.tvTime.text = "Time's up!!!"
+                handler.removeCallbacks(runnable)
 
-                for (image in imageArray) { // image array içinde dön
-                    image.visibility = View.INVISIBLE // resimler gizle.
+                val dialog = AlertDialog.Builder(this@MainActivity).apply {
+                    setCancelable(false)
+                    setTitle(getString(R.string.game_name))
+                    setMessage("Your score : $score\nWould you like play again?")
                 }
-
-                val dialog = AlertDialog.Builder(this@MainActivity)
-                dialog.setCancelable(false)
-                dialog.setTitle("Catch The Fruits")
-                dialog.setMessage("Yaptığın Skor : $score\nTekrardan oynamak ister misiniz ?")
-                dialog.setPositiveButton("YES") { _, _ ->
-                    restart()
-
+                dialog.setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    playAndRestart()
                 }
-                    .setNegativeButton("NO ") { _, _ ->
+                    .setNegativeButton(getString(R.string.no)) { _, _ ->
                         score = 0
-                        binding.tvScore.text = "Score : $score"
-                        binding.tvTime.text = "Time : " + "0"
+                        "Score : $score".apply { binding.tvScore.text = this }
+                        ("Time : " + "0").apply { binding.tvTime.text = this }
 
-                        for (image in imageArray) { // image array içinde dön
-                            image.visibility = View.INVISIBLE // resimler gizle.
+                        for (image in imageArray) {
+                            image.visibility = View.INVISIBLE
                         }
                         finish()
                     }
@@ -82,77 +112,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             @SuppressLint("SetTextI18n")
-            override fun onTick(p0: Long) { // herbir saniyede neler olacak
-                binding.tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
-            }
-        }.start()
-    }
-
-
-    // resimleri gizleme metodu
-    private fun hideImages() {
-        runnable = Runnable()// runnable ile ilgili işlemler yapılıyor.
-        {
-            for (image in imageArray) { // image array içinde dön
-                image.visibility = View.INVISIBLE // resimler gizle.
-            }
-            val random = Random() // random nesnesi olusturma
-            val index = random.nextInt(8 - 0) // 9 adet random sayı olusturma
-            imageArray[index].visibility = View.VISIBLE // rastgele bir index görünür yapma
-            handler.postDelayed(runnable, 500) // resimleri yarım saniyede bir değiştirme
-        }
-        handler.post(runnable) // handler'a runnable atama işlemi yapılıyor.
-    }
-
-    // resimlere tıklanınca puan arttıran fonksiyon
-    @SuppressLint("SetTextI18n")
-    fun increaseScore(view: View) {
-        score++ // skor arttırma
-        binding.tvScore.text = "Score : $score" // skor değeri ekranda gösteriliyor.
-    }
-
-    // tekrar oynama metodu
-    @SuppressLint("SetTextI18n")
-    fun restart() {
-        score = 0
-        binding.tvScore.text = "Score : $score"
-        hideImages()
-        binding.tvTime.text = "Time : " + 10000 / 1000
-
-        for (image in imageArray) { // image array içinde dön
-            image.visibility = View.INVISIBLE // resimler gizle.
-        }
-
-        object : CountDownTimer(10000, 1000) {
-            @SuppressLint("SetTextI18n")
-            override fun onFinish() { // oyun bitiminde neler olacak
-                binding.tvTime.text = "Zaman Doldu !!!" // zaman dolunca mesaj yaz.
-                handler.removeCallbacks(runnable) // gelen çeğrıları sil
-
-                val dialog = AlertDialog.Builder(this@MainActivity)
-                dialog.setCancelable(false)
-                dialog.setTitle("Catch The Fruits")
-                dialog.setMessage("Yaptığın Skor : $score\nTekrardan oynamak ister misiniz ?")
-                dialog.setPositiveButton("YES") { _, _ ->
-                    restart()
-                }
-                    .setNegativeButton("NO") { _, _ ->
-                        score = 0
-                        binding.tvScore.text = "Score : $score"
-                        binding.tvTime.text = "Time : " + "0"
-
-                        for (image in imageArray) { // image array içinde dön
-                            image.visibility = View.INVISIBLE // resimler gizle.
-                        }
-                    }
-
-                val alert = dialog.create()
-                alert.show()
-            }
-
-            @SuppressLint("SetTextI18n")
-            override fun onTick(p0: Long) { // herbir saniyede neler olacak
-                binding.tvTime.text = "Time : " + p0 / 1000 // saniye cinsinden değerini yazdır.
+            override fun onTick(p0: Long) {
+                binding.tvTime.text = "Time : " + p0 / 1000
             }
         }.start()
     }
