@@ -108,8 +108,9 @@ class MainActivity : AppCompatActivity() {
                         finish()
                     }
 
-                val alert = dialog.create()
-                alert.show()
+                 dialog.create().apply {
+                    show()
+                }
             }
 
             @SuppressLint("SetTextI18n")
