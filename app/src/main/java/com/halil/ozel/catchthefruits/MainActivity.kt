@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 }
                     .setNegativeButton(getString(R.string.no)) { _, _ ->
                         score = 0
-                        "Score : $score".apply { binding.score = this }
+                        ("Score : $score").apply { binding.score = this }
                         ("Time : " + "0").apply { binding.time = this }
 
                         for (image in imageArray) {
