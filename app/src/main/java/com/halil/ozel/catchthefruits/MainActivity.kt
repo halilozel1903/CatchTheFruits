@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun onTick(p0: Long) {
-                binding.time = "Time : " + p0 / 1000
+                binding.time = getString(R.string.time) + p0 / 1000
             }
         }.start()
     }
