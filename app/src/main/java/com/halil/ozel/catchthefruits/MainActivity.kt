@@ -16,13 +16,9 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     var score: Int = 0
-
     var imageArray = ArrayList<ImageView>()
-
     var handler: Handler = Handler(Looper.getMainLooper())
-
     var runnable: Runnable = Runnable { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
