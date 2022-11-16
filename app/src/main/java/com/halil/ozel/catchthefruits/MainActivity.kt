@@ -103,7 +103,6 @@ class MainActivity : AppCompatActivity() {
                         }
                         finish()
                     }
-
                  dialog.create().apply {
                     show()
                 }
