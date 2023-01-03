@@ -224,6 +224,12 @@ If you're curious, let's examine the method below ;)
 
 Each time the user clicks, the score variable is incremented once and updates the score value on the screen.
 
+## Donation 💸
+
+If this project help 💁 you to develop, you can give me a cup of coffee. ☕
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/halilozel1903)
+
 ## License  ℹ️
 ```
 MIT License
