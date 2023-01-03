@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             val random = Random()
             val index = random.nextInt(8 - 0)
             imageArray[index].visibility = View.VISIBLE
-            handler.postDelayed(runnable, 500)
+            handler.postDelayed(runnable, FIVE_HUNDRED)
         }
         handler.post(runnable)
     }
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             image.visibility = View.INVISIBLE
         }
 
-        object : CountDownTimer(10000, 1000) {
+        object : CountDownTimer(TEN_THOUSAND, ONE_THOUSAND) {
             @SuppressLint("SetTextI18n")
             override fun onFinish() {
                 binding.time = "Time's up!!!"
@@ -113,5 +113,11 @@ class MainActivity : AppCompatActivity() {
                 binding.time = getString(R.string.time) + tick / 1000
             }
         }.start()
+    }
+
+    companion object {
+        private const val TEN_THOUSAND = 10000L
+        private const val ONE_THOUSAND = 1000L
+        private const val FIVE_HUNDRED = 500L
     }
 }
