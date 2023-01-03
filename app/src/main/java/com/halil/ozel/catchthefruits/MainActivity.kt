@@ -103,14 +103,14 @@ class MainActivity : AppCompatActivity() {
                         }
                         finish()
                     }
-                 dialog.create().apply {
+                dialog.create().apply {
                     show()
                 }
             }
 
             @SuppressLint("SetTextI18n")
-            override fun onTick(p0: Long) {
-                binding.time = getString(R.string.time) + p0 / 1000
+            override fun onTick(tick: Long) {
+                binding.time = getString(R.string.time) + tick / 1000
             }
         }.start()
     }
