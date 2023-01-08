@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         )
 
         hideImages()
-
         playAndRestart()
     }
 
