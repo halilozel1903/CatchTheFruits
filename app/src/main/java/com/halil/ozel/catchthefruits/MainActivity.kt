@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         object : CountDownTimer(TEN_THOUSAND, ONE_THOUSAND) {
             @SuppressLint("SetTextI18n")
             override fun onFinish() {
-                binding.time = "Time's up!!!"
+                binding.time = getString(R.string.time_up)
                 handler.removeCallbacks(runnable)
 
                 val dialog = AlertDialog.Builder(this@MainActivity).apply {
