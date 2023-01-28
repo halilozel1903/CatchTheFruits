@@ -6,6 +6,6 @@
     <string name="yes">YES</string>
     <string name="game_name">Catch The Fruits</string>
     <string name="no">NO</string>
-    <string name="time">\"Time : \"</string>
+    <string name="time">Time : "</string>
     <string name="time_up">Time\'s up!!!</string>
 </resources>
