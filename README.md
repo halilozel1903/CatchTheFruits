@@ -114,7 +114,6 @@ Below are the codes related to the definition and usage of Alert Dialog:
                 alert.show() 
 ```
 
-<br>
 
 ## Alert Dialog Screenshot 👀
 
@@ -140,7 +139,6 @@ Object definitions are made.
 ```kotlin 
         object : CountDownTimer(10000, 1000) {
 
-
             override fun onFinish() { 
 
                 tvTime.text = "Time's up!" 
@@ -158,7 +156,6 @@ Object definitions are made.
 
                 tvTime.text = "Time : " + p0 / 1000 
             }
-
 
         }.start()
 ```
@@ -180,28 +177,23 @@ Generate 9 random numbers with the help of the Random class and use them in the 
 we show a random image every half second. It has a structure that repeats these processes continuously.
 We do it with the help of runnable and handler.
 
-// method to hide pictures
-
 ```kotlin
-    fun hideImages() {
+// method to hide pictures
+fun hideImages() {
+    runnable = Runnable {
+        for (image in imageArray) {
 
-        runnable = object : Runnable { 
-            override fun run() {
-                for (image in imageArray) { 
-
-                    image.visibility = View.INVISIBLE
-                }
-
-                val random = Random() 
-                val index = random.nextInt(8 - 0)
-                imageArray[index].visibility = View.VISIBLE 
-
-                handler.postDelayed(runnable, 500) 
-            }
+            image.visibility = View.INVISIBLE
         }
-        handler.post(runnable)
 
+        val random = Random()
+        val index = random.nextInt(8 - 0)
+        imageArray[index].visibility = View.VISIBLE
+
+        handler.postDelayed(runnable, 500)
     }
+    handler.post(runnable)
+}
 ```
 
 
@@ -213,13 +205,13 @@ If you're curious, let's examine the method below ;)
 ```kotlin
 // Function that increases points when clicking pictures
 
-    fun increaseScore(view: View) {
+fun increaseScore(view: View) {
 
-        score++
+    score++
 
-        tvScore.text = "Score : " + score // score value is displayed on the screen.
+    tvScore.text = "Score : $score" // score value is displayed on the screen.
 
-    }
+}
 ```
 
 Each time the user clicks, the score variable is incremented once and updates the score value on the screen.
@@ -234,7 +226,7 @@ If this project help 💁 you to develop, you can give me a cup of coffee. ☕
 ```
 MIT License
 
-Copyright (c) 2022 Halil OZEL
+Copyright (c) 2023 Halil OZEL
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
