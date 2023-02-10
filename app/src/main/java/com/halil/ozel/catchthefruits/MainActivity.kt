@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             binding.ivStrawberry,
             binding.ivWatermelon
         )
-
         hideImages()
         playAndRestart()
     }
