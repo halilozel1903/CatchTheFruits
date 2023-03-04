@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         playAndRestart()
     }
 
-
     private fun hideImages() {
         runnable = Runnable {
             for (image in imageArray) {
