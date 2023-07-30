@@ -3,8 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 33
     defaultConfig {
+        compileSdk 33
         applicationId "com.halil.ozel.catchthefruits"
         minSdkVersion 21
         targetSdkVersion 33
@@ -21,6 +21,16 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
+    }
+
     namespace 'com.halil.ozel.catchthefruits'
 }
 
