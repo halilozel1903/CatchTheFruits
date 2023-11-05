@@ -26,17 +26,13 @@ class MainActivity : AppCompatActivity() {
         binding.catchFruits = this
         binding.score = getString(R.string.score_0)
         score = 0
-        imageArray.addAll(listOf(
-            binding.ivApple,
-            binding.ivBanana,
-            binding.ivCherry,
-            binding.ivGrapes,
-            binding.ivKiwi,
-            binding.ivOrange,
-            binding.ivPear,
-            binding.ivStrawberry,
-            binding.ivWatermelon
-        ))
+        imageArray.addAll(
+            listOf(
+                binding.ivApple, binding.ivBanana, binding.ivCherry,
+                binding.ivGrapes, binding.ivKiwi, binding.ivOrange,
+                binding.ivPear, binding.ivStrawberry, binding.ivWatermelon
+            )
+        )
         hideImages()
         playAndRestart()
     }
@@ -44,28 +40,26 @@ class MainActivity : AppCompatActivity() {
     private fun hideImages() {
         runnable = Runnable {
             imageArray.forEach { it.visibility = View.INVISIBLE }
-            val randomIndex = Random().nextInt(8)
-            imageArray[randomIndex].visibility = View.VISIBLE
-            handler.postDelayed(runnable, FIVE_HUNDRED)
+            imageArray[Random().nextInt(8)].visibility = View.VISIBLE
+            handler.postDelayed(runnable, 500)
         }
         handler.post(runnable)
     }
 
     @SuppressLint("SetTextI18n")
     fun increaseScore() {
-        score++
-        binding.score = "Score : $score"
+        binding.score = "Score : " + (++score)
     }
 
     @SuppressLint("SetTextI18n")
     fun playAndRestart() {
         score = 0
-        binding.score = "Score : $score"
+        binding.score = "Score : 0"
         hideImages()
-        binding.time = "Time : " + 10000 / 1000
+        binding.time = "Time : 10"
         imageArray.forEach { it.visibility = View.INVISIBLE }
 
-        object : CountDownTimer(TEN_THOUSAND, ONE_THOUSAND) {
+        object : CountDownTimer(10000, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onFinish() {
                 binding.time = getString(R.string.time_up)
@@ -75,12 +69,10 @@ class MainActivity : AppCompatActivity() {
                     setCancelable(false)
                     setTitle(getString(R.string.game_name))
                     setMessage("Your score : $score\nWould you like to play again?")
-                    setPositiveButton(getString(R.string.yes)) { _, _ ->
-                        playAndRestart()
-                    }
+                    setPositiveButton(getString(R.string.yes)) { _, _ -> playAndRestart() }
                     setNegativeButton(getString(R.string.no)) { _, _ ->
                         score = 0
-                        binding.score = "Score : $score"
+                        binding.score = "Score : 0"
                         binding.time = "Time : 0"
                         imageArray.forEach { it.visibility = View.INVISIBLE }
                         finish()
@@ -90,14 +82,8 @@ class MainActivity : AppCompatActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun onTick(tick: Long) {
-                binding.time = getString(R.string.time) + tick / 1000
+                binding.time = "Time : " + tick / 1000
             }
         }.start()
-    }
-
-    companion object {
-        private const val TEN_THOUSAND = 10000L
-        private const val ONE_THOUSAND = 1000L
-        private const val FIVE_HUNDRED = 500L
     }
 }
