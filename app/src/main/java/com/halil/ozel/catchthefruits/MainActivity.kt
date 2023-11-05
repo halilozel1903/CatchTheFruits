@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AlertDialog
 import android.view.View
@@ -16,21 +15,18 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    var score: Int = 0
-    var imageArray = ArrayList<ImageView>()
-    var handler: Handler = Handler(Looper.getMainLooper())
-    var runnable: Runnable = Runnable { }
+    private var score = 0
+    private val imageArray = ArrayList<ImageView>()
+    private val handler = android.os.Handler(Looper.getMainLooper())
+    private lateinit var runnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         binding.catchFruits = this
         binding.score = getString(R.string.score_0)
-
         score = 0
-
-        imageArray = arrayListOf(
+        imageArray.addAll(listOf(
             binding.ivApple,
             binding.ivBanana,
             binding.ivCherry,
@@ -40,24 +36,20 @@ class MainActivity : AppCompatActivity() {
             binding.ivPear,
             binding.ivStrawberry,
             binding.ivWatermelon
-        )
+        ))
         hideImages()
         playAndRestart()
     }
 
     private fun hideImages() {
         runnable = Runnable {
-            for (image in imageArray) {
-                image.visibility = View.INVISIBLE
-            }
-            val random = Random()
-            val index = random.nextInt(8 - 0)
-            imageArray[index].visibility = View.VISIBLE
+            imageArray.forEach { it.visibility = View.INVISIBLE }
+            val randomIndex = Random().nextInt(8)
+            imageArray[randomIndex].visibility = View.VISIBLE
             handler.postDelayed(runnable, FIVE_HUNDRED)
         }
         handler.post(runnable)
     }
-
 
     @SuppressLint("SetTextI18n")
     fun increaseScore() {
@@ -71,10 +63,7 @@ class MainActivity : AppCompatActivity() {
         binding.score = "Score : $score"
         hideImages()
         binding.time = "Time : " + 10000 / 1000
-
-        for (image in imageArray) {
-            image.visibility = View.INVISIBLE
-        }
+        imageArray.forEach { it.visibility = View.INVISIBLE }
 
         object : CountDownTimer(TEN_THOUSAND, ONE_THOUSAND) {
             @SuppressLint("SetTextI18n")
@@ -82,27 +71,21 @@ class MainActivity : AppCompatActivity() {
                 binding.time = getString(R.string.time_up)
                 handler.removeCallbacks(runnable)
 
-                val dialog = AlertDialog.Builder(this@MainActivity).apply {
+                AlertDialog.Builder(this@MainActivity).apply {
                     setCancelable(false)
                     setTitle(getString(R.string.game_name))
-                    setMessage("Your score : $score\nWould you like play again?")
-                }
-                dialog.setPositiveButton(getString(R.string.yes)) { _, _ ->
-                    playAndRestart()
-                }
-                    .setNegativeButton(getString(R.string.no)) { _, _ ->
+                    setMessage("Your score : $score\nWould you like to play again?")
+                    setPositiveButton(getString(R.string.yes)) { _, _ ->
+                        playAndRestart()
+                    }
+                    setNegativeButton(getString(R.string.no)) { _, _ ->
                         score = 0
-                        ("Score : $score").apply { binding.score = this }
-                        ("Time : " + "0").apply { binding.time = this }
-
-                        for (image in imageArray) {
-                            image.visibility = View.INVISIBLE
-                        }
+                        binding.score = "Score : $score"
+                        binding.time = "Time : 0"
+                        imageArray.forEach { it.visibility = View.INVISIBLE }
                         finish()
                     }
-                dialog.create().apply {
-                    show()
-                }
+                }.create().show()
             }
 
             @SuppressLint("SetTextI18n")
