@@ -114,12 +114,6 @@ Below are the codes related to the definition and usage of Alert Dialog:
                 alert.show() 
 ```
 
-
-## Alert Dialog Screenshot 👀
-
-![Alert](alert.png)
-
-
 ## Using Runnable, Handler and Timer ⏱
 
 **Runnable** : The operations to be done within the run method are specified.
