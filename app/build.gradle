@@ -4,10 +4,10 @@ apply plugin: 'kotlin-kapt'
 
 android {
     defaultConfig {
-        compileSdk 33
+        compileSdk 34
         applicationId "com.halil.ozel.catchthefruits"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
